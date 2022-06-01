@@ -9,11 +9,13 @@ void main()
     pid_t pid;
     pid = fork();
 
+    // Error
     if (pid < 0)
     {
         perror("Error creating process.\n");
     }
 
+    // Child
     if (pid == 0)
     {
         printf("CHILD: This is the child process.\n");
@@ -22,6 +24,7 @@ void main()
         execlp("pwd", "pwd", NULL);
     }
 
+    // Parent
     if (pid > 0)
     {
         wait(NULL);
