@@ -28,7 +28,7 @@ void main()
     if (pid > 0)
     {
         wait(NULL);
-        printf("Child process complete.\n ");
+        printf("Child process complete.\n");
         printf("PARENT: This is the parent process.\n");
         printf("PARENT: Parent's PID: %d\n", getpid());
         printf("PARENT: Child's PID: %d\n", pid);
