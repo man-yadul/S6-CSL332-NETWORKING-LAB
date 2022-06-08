@@ -15,8 +15,6 @@ char text[MAX];
 
 void func(int sockfd)
 {
-    int n;
-
     // Read username and password and send to server
     printf("Enter username: ");
     scanf("%s", username);
