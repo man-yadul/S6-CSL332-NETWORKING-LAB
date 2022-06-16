@@ -15,7 +15,9 @@ int main()
 {
     int sockfd;
     char buffer[MAXLINE];
-    char *hello = "Hello from server";
+    char str[100];
+    printf("Enter message to send: ");
+    scanf("%s", str);
     struct sockaddr_in servaddr, cliaddr;
 
     // Creating socket file descriptor
@@ -34,10 +36,9 @@ int main()
     servaddr.sin_port = htons(PORT);
 
     // Bind the socket with the server address
-    if (bind(sockfd, (const struct sockaddr *)&servaddr,
-             sizeof(servaddr)) < 0)
+    if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0)
     {
-        perror("bind failed");
+        perror("Bind failed");
         exit(EXIT_FAILURE);
     }
 
@@ -45,15 +46,11 @@ int main()
 
     len = sizeof(cliaddr); // len is value/result
 
-    n = recvfrom(sockfd, (char *)buffer, MAXLINE,
-                 MSG_WAITALL, (struct sockaddr *)&cliaddr,
-                 &len);
+    n = recvfrom(sockfd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *)&cliaddr, &len);
     buffer[n] = '\0';
     printf("Client : %s\n", buffer);
-    sendto(sockfd, (const char *)hello, strlen(hello),
-           MSG_CONFIRM, (const struct sockaddr *)&cliaddr,
-           len);
-    printf("Hello message sent.\n");
+    sendto(sockfd, (const char *)str, strlen(str), MSG_CONFIRM, (const struct sockaddr *)&cliaddr, len);
+    printf("Message sent.\n");
 
     return 0;
 }
