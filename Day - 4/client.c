@@ -15,13 +15,16 @@ int main()
 {
     int sockfd;
     char buffer[MAXLINE];
-    char *hello = "Hello from client";
+    char str[100];
+    printf("Enter message to send: ");
+    scanf("%s", str);
+
     struct sockaddr_in servaddr;
 
     // Creating socket file descriptor
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
     {
-        perror("socket creation failed");
+        perror("Socket creation failed");
         exit(EXIT_FAILURE);
     }
 
@@ -34,14 +37,10 @@ int main()
 
     int n, len;
 
-    sendto(sockfd, (const char *)hello, strlen(hello),
-           MSG_CONFIRM, (const struct sockaddr *)&servaddr,
-           sizeof(servaddr));
-    printf("Hello message sent.\n");
+    sendto(sockfd, (const char *)str, strlen(str), MSG_CONFIRM, (const struct sockaddr *)&servaddr, sizeof(servaddr));
+    printf("Message sent.\n");
 
-    n = recvfrom(sockfd, (char *)buffer, MAXLINE,
-                 MSG_WAITALL, (struct sockaddr *)&servaddr,
-                 &len);
+    n = recvfrom(sockfd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *)&servaddr, &len);
     buffer[n] = '\0';
     printf("Server : %s\n", buffer);
 
