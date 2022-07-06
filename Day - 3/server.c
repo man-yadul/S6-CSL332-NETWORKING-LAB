@@ -47,7 +47,8 @@ void func(int connfd)
         i++;
         j--;
     }
-
+    
+    printf("SERVER - Reversed string: %s\n", text);
     write(connfd, text, sizeof(text));
     
     exit(0);
