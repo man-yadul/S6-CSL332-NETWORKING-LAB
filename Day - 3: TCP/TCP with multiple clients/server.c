@@ -55,6 +55,7 @@ void main()
         Only two clients are created in this program
         Create a separate connfd variable for each client
         i.e., If there are 5 clients, create connfd1, connfd2, ... , connfd5
+        The no. of read and write operations is directly proportional to the no. of clients
     */
     
     connfd1 = accept(sockfd, (SA *)&cli, &len);
