@@ -40,9 +40,7 @@ void main()
 	else
 		printf("Connection successful.\n");
 
-	int count = 1;
 	int ch;
-	int reply;
 	int start = 0;
 	int windowsize = 4;
 	int end = 3;
