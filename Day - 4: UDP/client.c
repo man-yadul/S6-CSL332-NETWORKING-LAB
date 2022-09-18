@@ -38,7 +38,6 @@ int main()
 
     int n, len;
 
-    // sendto(sockfd, (const char *)str, strlen(str), MSG_CONFIRM, (const struct sockaddr *)&servaddr, sizeof(servaddr));
     sendto(sockfd, str, sizeof(str), MSG_CONFIRM, (SA *)&servaddr, sizeof(servaddr));
     printf("Message sent.\n");
 
