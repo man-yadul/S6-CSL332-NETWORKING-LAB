@@ -9,6 +9,7 @@
 
 #define PORT 8080
 #define MAXLINE 1024
+#define SA struct sockaddr
 
 // Driver code
 int main()
@@ -33,14 +34,15 @@ int main()
     // Filling server information
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(PORT);
-    servaddr.sin_addr.s_addr = INADDR_ANY;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
     int n, len;
 
-    sendto(sockfd, (const char *)str, strlen(str), MSG_CONFIRM, (const struct sockaddr *)&servaddr, sizeof(servaddr));
+    // sendto(sockfd, (const char *)str, strlen(str), MSG_CONFIRM, (const struct sockaddr *)&servaddr, sizeof(servaddr));
+    sendto(sockfd, str, sizeof(str), MSG_CONFIRM, (SA *)&servaddr, sizeof(servaddr));
     printf("Message sent.\n");
 
-    n = recvfrom(sockfd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *)&servaddr, &len);
+    n = recvfrom(sockfd, buffer, sizeof(buffer), MSG_WAITALL, (SA *)&servaddr, &len);
     buffer[n] = '\0';
     printf("Server : %s\n", buffer);
 
