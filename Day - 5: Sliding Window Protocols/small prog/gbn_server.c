@@ -63,12 +63,10 @@ void main()
 	else
 		printf("Connection successful.\n");
 
-	int count = 1;
 	int windowsize = 4;
 	int start = 0;
 	int end = 3;
 	int ch;
-	int reply;
 	int err_frame;
 
 	while (1)
