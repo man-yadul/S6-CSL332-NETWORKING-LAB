@@ -9,8 +9,8 @@
 
 #define PORT 8080
 #define MAXLINE 1024
+#define SA struct sockaddr
 
-// Driver code
 int main()
 {
     int sockfd;
@@ -31,12 +31,12 @@ int main()
     memset(&cliaddr, 0, sizeof(cliaddr));
 
     // Filling server information
-    servaddr.sin_family = AF_INET; // IPv4
-    servaddr.sin_addr.s_addr = INADDR_ANY;
+    servaddr.sin_family = AF_INET; 
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port = htons(PORT);
 
     // Bind the socket with the server address
-    if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0)
+    if (bind(sockfd, (SA *)&servaddr, sizeof(servaddr)) < 0)
     {
         perror("Bind failed");
         exit(EXIT_FAILURE);
@@ -44,12 +44,12 @@ int main()
 
     int len, n;
 
-    len = sizeof(cliaddr); // len is value/result
+    len = sizeof(cliaddr); 
 
-    n = recvfrom(sockfd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *)&cliaddr, &len);
+    n = recvfrom(sockfd, buffer, sizeof(buffer), MSG_WAITALL, (SA *)&cliaddr, &len);
     buffer[n] = '\0';
     printf("Client : %s\n", buffer);
-    sendto(sockfd, (const char *)str, strlen(str), MSG_CONFIRM, (const struct sockaddr *)&cliaddr, len);
+    sendto(sockfd, str, sizeof(str), MSG_CONFIRM, (SA *)&cliaddr, len);
 
     return 0;
 }
