@@ -76,9 +76,7 @@ void main()
 
 		switch (ch)
 		{
-			case 0:	
-
-					for (int i = start; i <= end; i++)
+			case 0:	for (int i = start; i <= end; i++)
 					{
 						printf("Frame %d transmitted successfully.\n", i);
 						sleep(1);
