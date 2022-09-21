@@ -86,7 +86,7 @@ void main()
 
 					break;
 
-			case 1:	err_frame = (rand() % (start - end + 1)) + start;
+			case 1:	err_frame = (rand() % (end - start + 1)) + start;
 					write(connfd, &err_frame, sizeof(err_frame));
 
 					for (int i = start; i <= end; i++)
