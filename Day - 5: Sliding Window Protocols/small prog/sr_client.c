@@ -79,7 +79,7 @@ void main()
 						}
 					}
 
-					printf("Resent frame acknowledgemed.\n");
+					printf("Resent frame acknowledged.\n");
 					sleep(1);
 					break;
 		}
